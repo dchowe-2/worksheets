@@ -22,14 +22,6 @@
   
 -Date Last Updated:
 
-# Midterm 3:
-
--Blank Notes:
-  
--Solutions Notes:
-  
--Date Last Updated:
-
 # Final:
 
 -Blank Notes:
