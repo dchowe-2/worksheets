@@ -1,4 +1,4 @@
-Things to Check:
+# Things to Check:
   
 -Does the solutions file exist?
   
@@ -6,7 +6,31 @@ Things to Check:
   
 -Do the solutions align with the blank file?
 
-Final Worksheet:
+# Midterm 1:
+
+-Blank Notes:
+  
+-Solutions Notes:
+  
+-Date Last Updated:
+
+# Midterm 2:
+
+-Blank Notes:
+  
+-Solutions Notes:
+  
+-Date Last Updated:
+
+# Midterm 3:
+
+-Blank Notes:
+  
+-Solutions Notes:
+  
+-Date Last Updated:
+
+# Final:
 
 -Blank Notes:
   
