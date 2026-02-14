@@ -138,32 +138,26 @@
 
 \vfill
 
-\paragraph{7)} Initially, both capacitors $C_1$ and $C_2$ are entirely discharged.
+\paragraph{7)} Initially, capacitor $C_1$ is entirely discharged.
 
 \begin{figure}[ht!]
 \centering
 \begin{circuitikz}[american, voltage dir = old, transform shape]
 \node[cute spdt mid arrow]	(sw) {};
-\draw (sw.out 1)  to[R, l=$R_2$] ++ (3,0) coordinate (rbranch)
-			to[C, l=$C_2$, v=$v_{C2}$] ++ (0,-3);
-\draw (rbranch) to[short] ++ (2,0) to[R, l=$R_3$] ++(0,-3) to[short] ++ (-5,0) coordinate (base) to[V=5V]  (sw.out 2);
-\draw (sw.in) to [R, l_=$R_1$] (-3,0) to[C,l=$C_1$,v=$v_{C1}$] (-3,-2.5) |- (base);
+\draw (sw.out 1)  to[R, l=$2\Omega$] ++ (3,0) coordinate (rbranch)
+			to[R, l=$8\Omega$] ++ (0,-3);
+\draw (rbranch) to[short] ++ (2,0) to[R, l=$4\Omega$] ++(0,-3) to[short] ++ (-5,0) coordinate (base) to[V=5V]  (sw.out 2);
+\draw (sw.in) to [R, l_=$5\Omega$] (-3,0) to[C,l=$\frac{1}{2}$F,v=$v_C$] (-3,-2.5) |- (base);
 \node at (sw.out 1) [anchor=south] {B};
 \node at (sw.out 2) [anchor=west] {A};
 \end{circuitikz}
 \end{figure}
 
-\paragraph{a)} At time $t = t_1$, the switch is thrown to position A, connecting the left half to the voltage source. Find a symbolic expression for $v_{C1}(t)$, the voltage across the capacitor $C_1$.
+\paragraph{a)} At time $t = 0$, the switch is thrown to position A, connecting the left half to the voltage source. Find the expression for $v_C(t)$, the voltage across the capacitor for $t>0$.
 
-\paragraph{b)} Enough time passes such that $C_1$ is entirely charged. The switch is then thrown at time $t = t_2$ from position A to position B, disconnecting the left half from the voltage source and connecting it instead to the right half of the circuit, with the voltage source left entirely disconnected. Find the new expression for $v_{C1}(t)$, the voltage across the capacitor $C_1$.
+\paragraph{b)} Enough time passes such that the capacitor is entirely charged. The switch is then thrown at time $t = t_0$ from position A to position B, disconnecting the left half from the voltage source and connecting it instead to the right half of the circuit, with the voltage source left entirely disconnected. Find the new expression for $v_C(t)$, the voltage across the capacitor for $t>t_0$.
 
-\paragraph{Note:} The solution of a second order differential equation $a\ddot{x} + b\dot{x} + c = 0$ with initial conditions $x(t_0) = m$, $\dot{x}(t_0) = n$, is given as:
-
-\[
-x = C_1\exp(r_1x) + C_2\exp(r_2x)
-\]
-
-where $r_1, r_2$ are the roots of $ax^2 + bx + c$, and $C_1, C_2$ are found from initial conditions.
+\paragraph{Note:} Do not forget the time shift introduced by flipping the switch at time $t=t_0$.
 
 \vfill
 \newpage
@@ -194,27 +188,19 @@ v_{out} = 10^6\times(v_+ - v_-)
 
 \subparagraph{b)} What happens when the output of the chip is instead connected back to the non-inverting terminal ($v_+$)?
 
-\subparagraph{c)} Find $v_{out}(t)$ in terms of $v_{in}(t)$, assuming both voltages are in reference to a common ground, using:
+\subparagraph{c)} Find $v_{out}(t)$ in terms of $v_{in}(t)$ for the figure below using the ideal op-amp approximation.
 \newline
-
-\quad$\textbf{i) }$ideal op-amp approximations.\newline
-
-\quad$\textbf{ii) }$ the given op-amp model. \newline
-
-Assume the capacitor has some non-zero initial charge $q_0$.
 
 \begin{figure}[ht!]
 \centering
 \begin{circuitikz}[american, voltage dir = old, transform shape]
 \node[op amp, anchor=+] (amp) {};
 \draw (amp.+) to[short] (0,-0.5) node[ground]{};
-\draw (amp.-) to[short] (0, 2) to[R,l=$R_1$] (2.2,2) -| (amp.out) to[short, -o] ++ (0.5,0) node [anchor=west] {$v_{out}$};
-\draw (amp.-) to[C,l_=$C_1$,-o] ++ (-2,0) node [anchor=east] {$v_{in}$};
+\draw (amp.-) to[short] (0, 2) to[R,l=$25\Omega$] (2.2,2) -| (amp.out) to[short, -o] ++ (0.5,0) node [anchor=west] {$v_{out}$};
+\draw (amp.-) to[R,l_=$5\Omega$,-o] ++ (-2,0) node [anchor=east] {$v_{in}$};
 \end{circuitikz}
 \end{figure}
 
-\quad$\textbf{iii) }$ Do your results from c.i) and c.ii) match?
-
-
+\quad$\textbf{i) }$ What is this op-amp circuit doing? What does it accomplish?
 
 \end{document}

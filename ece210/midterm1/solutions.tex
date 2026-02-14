@@ -1,3 +1,4 @@
+
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[utf8]{inputenc}
@@ -183,7 +184,51 @@ which is trivially true for all real $a,b$.
 
 \subparagraph{a)} There is only one value of $\alpha$ that makes this circuit a valid circuit. Find it.
 
+\subparagraph{Solution} Use KCL at the top-most node:
+\begin{center}
+$\alpha*v_x-\frac{v_x}{4}-\frac{v_x}{3}=0$
+\end{center}
+
+This equation must sum to zero, so $\alpha$ must satisfy:
+
+\begin{center}
+$\alpha = \frac{1}{4}+\frac{1}{3} = \frac{7}{12}$
+\end{center}
+\begin{center}
+\[
+\boxed{\alpha = \frac{7}{12}}
+\]
+\end{center}
+
 \subparagraph{b)} Find $i_t$, the current across the 1 $\Omega$ resistor, as indicated.
+\subparagraph{Solution} Suppose the center bottom node is grounded, $V_1$ is the bottom left node, and the middle node is $V_2$. Applying KCL at the ground node results in:
+\begin{center}
+$i_t+\frac{V_2}{3}+\frac{V_2}{2}=0$
+\end{center}
+Use Ohm's Law to obtain $i_t$ in terms of $V_1$:
+\begin{center}
+$i_t=\frac{V_1-(-1)}{1}=V_1+1$
+\end{center}
+
+Also note that the 2V voltage source creates the following relationship:
+\begin{center}
+$V_2=V_1+2$
+\end{center}
+
+We can use these relationships to solve for $V_1$ via substitution in the KCL equation:
+
+\begin{center}
+$i_t + \frac{5}{6}V_2 = 0$ \\[2mm]
+$V_1 + 1 + \frac{5}{6}V_1 + \frac{5}{3} = 0$ \\[2mm]
+$\frac{11}{16}V_1 = -\frac{8}{3}$ \\[2mm]
+$V_1 = -\frac{16}{11}$V
+\end{center}
+
+Now, we can solve for $i_t$ by simply plugging in our value for $V_1$:
+
+\[
+\boxed{i_t=-\frac{16}{11} + 1 =-\frac{5}{11}A}
+\]
 
 \vfill
 
@@ -199,8 +244,60 @@ which is trivially true for all real $a,b$.
 \end{circuitikz}
 \end{figure}
 \subparagraph{a)} Find the Thevenin equivalent voltage.
+\subparagraph{Solution} Identify that there is no current through the dependent source because of the open circuit.
+\begin{center}
+$V_T=-v_x$
+\end{center}
+There is only one path for current to flow, so $v_x$ is simply just:
+\begin{center}
+$v_x=-1(3)=-3$V
+\end{center}
+
+\[
+\boxed{V_T = 3V}
+\]
+
+Note: The 3$\Omega$ resistor is using non-standard reference, so an extra negative sign is needed. Watch for this on the test!
+
+
 \subparagraph{b)} Find the Norton equivalent current.
+\subparagraph{Solution} Short the two terminals and perform KCL at the top node to solve for $v_x$:
+\begin{center}
+$1+\frac{v_x}{3}-2v_x=0$
+\end{center}
+\begin{center}
+$\frac{5}{3}v_x=1$
+\end{center}
+\begin{center}
+$v_x=\frac{3}{5}$V
+\end{center}
+All the current through the short must come from the dependent source:
+\begin{center}
+$I_N=2v_x$
+\end{center}
+\[
+\boxed{I_N=\frac{6}{5}A}
+\]
+
+\newpage
+
 \subparagraph{c)} If a $5\;\Omega$ load is connected across the terminals of this circuit, how much power is dissipated across the load?
+\subparagraph{Solution} Using the Thevenin equivalent circuit, adding a 5$\Omega$ load creates a voltage divider between the load and $R_T$. First, find $R_T$ using $V_T$ and $I_N$:
+\[
+R_T=\frac{V_I}{I_N}=\frac{3}{\frac{6}{5}}=\frac{5}{2}\Omega
+\]
+
+Use voltage divider to find the voltage across the 5$\Omega$ load:
+
+\[
+V_L=3(\frac{5}{5+\frac{5}{2}})=2V
+\]
+
+Now, we can solve for the power using $P=\frac{V^2}{R}$:
+
+\[
+\boxed{P_L = \frac{2^2}{5} = \frac{4}{5}W}
+\]
 
 \vfill
 
@@ -222,38 +319,138 @@ which is trivially true for all real $a,b$.
 
 \paragraph{a)} Find the zero-input solution for $v_C(t)$, the voltage across the capacitor.
 
+\subparagraph{Solution} Use the general solution to a first order differential equation for a capacitor's voltage:
+\begin{center}
+$v_C(t)=v_C(\infty) + (v(0^-) - v_C(\infty))e^{-t/\tau}$
+\end{center}
+
+\textbf{Note:} Knowing this general solution is \textbf{very} useful and will save you a lot of time on tests. It also works for inductors! Just replace $v_C$ with $i_L$ and the solution still holds. \\
+
+We're looking for the zero-input solution, so we can ignore the $v_C(\infty)$ terms (think about why this is). Initially, $C_2$ holds some charge $Q_0$. Use the equation 
+\begin{center}
+$Q=CV$
+\end{center}
+
+to determine that 
+
+\[
+v_C(0^-)=\frac{Q_0}{C_2}
+\]
+
+To find the time constant $\tau$, we suppress sources by shorting $V_1$ and opening $I_1$. Therefore, $\tau$ will consist of solely $R_1$ and $C_2$. 
+
+\begin{center}
+$\tau=R_1C_2$.
+\end{center}
+
+Substituting these values into our formula, we get:
+\[
+\boxed{{v_C}_{ZI}(t) = \frac{Q_0}{C_2}e^{-t/R_1C_2}V}
+\]
+
 \paragraph{b)} Find the zero-state solution for $v_C(t)$, the voltage across the capacitor.
+
+\subparagraph{Solution} Use the same general solution as part a, this time without the $v_C(0^-)$ term (think about what this term represents). \\
+
+At steady state ($t\rightarrow\infty$), no current enters the capacitor, so the voltage is constant. We can apply KVL to the left loop to find $v_C(\infty)$:
+
+\[
+v_C(\infty) = V_1 + R_1I_1
+\]
+
+Plug this into the solution to get:
+
+\[
+\boxed{{v_C}_{ZS}(t) = V_1 + I_1R_1(1-e^{-t/R_1C_1})V}
+\]
 
 \paragraph{c)} Find $v_C(t)$.
 
+\subparagraph{Solution} The full solution is simply the sum of the zero-state and zero-input solutions.
+
+\[
+\boxed{v_C(t) = V_1 + I_1R_1 + (\frac{Q_0}{C_2}-V_1-I_1R_1)e^{-t/R_1C_2}V}
+\]
+
 \vfill
 
-\paragraph{7)} Initially, both capacitors $C_1$ and $C_2$ are entirely discharged.
+\paragraph{7)} Initially, capacitor $C_1$ is entirely discharged.
 
 \begin{figure}[ht!]
 \centering
 \begin{circuitikz}[american, voltage dir = old, transform shape]
 \node[cute spdt mid arrow]	(sw) {};
-\draw (sw.out 1)  to[R, l=$R_2$] ++ (3,0) coordinate (rbranch)
-			to[C, l=$C_2$, v=$v_{C2}$] ++ (0,-3);
-\draw (rbranch) to[short] ++ (2,0) to[R, l=$R_3$] ++(0,-3) to[short] ++ (-5,0) coordinate (base) to[V=5V]  (sw.out 2);
-\draw (sw.in) to [R, l_=$R_1$] (-3,0) to[C,l=$C_1$,v=$v_{C1}$] (-3,-2.5) |- (base);
+\draw (sw.out 1)  to[R, l=$2\Omega$] ++ (3,0) coordinate (rbranch)
+			to[R, l=$8\Omega$] ++ (0,-3);
+\draw (rbranch) to[short] ++ (2,0) to[R, l=$4\Omega$] ++(0,-3) to[short] ++ (-5,0) coordinate (base) to[V=5V]  (sw.out 2);
+\draw (sw.in) to [R, l_=$5\Omega$] (-3,0) to[C,l=$\frac{1}{2}$F,v=$v_C$] (-3,-2.5) |- (base);
 \node at (sw.out 1) [anchor=south] {B};
 \node at (sw.out 2) [anchor=west] {A};
 \end{circuitikz}
 \end{figure}
 
-\paragraph{a)} At time $t = t_1$, the switch is thrown to position A, connecting the left half to the voltage source. Find a symbolic expression for $v_{C1}(t)$, the voltage across the capacitor $C_1$.
+\paragraph{a)} At time $t = 0$, the switch is thrown to position A, connecting the left half to the voltage source. Find the expression for $v_C(t)$, the voltage across the capacitor for $t>0$.
 
-\paragraph{b)} Enough time passes such that $C_1$ is entirely charged. The switch is then thrown at time $t = t_2$ from position A to position B, disconnecting the left half from the voltage source and connecting it instead to the right half of the circuit, with the voltage source left entirely disconnected. Find the new expression for $v_{C1}(t)$, the voltage across the capacitor $C_1$.
-
-\paragraph{Note:} The solution of a second order differential equation $a\ddot{x} + b\dot{x} + c = 0$ with initial conditions $x(t_0) = m$, $\dot{x}(t_0) = n$, is given as:
-
+\subparagraph{Solution} Recall the general solution to a first order differential equation for the voltage across a capacitor
 \[
-x = C_1\exp(r_1x) + C_2\exp(r_2x)
+v_C(t) = v_C(\infty) + (v_C(0^-)-v_C(\infty))e^{-t/\tau}
 \]
 
-where $r_1, r_2$ are the roots of $ax^2 + bx + c$, and $C_1, C_2$ are found from initial conditions.
+In this case, we are given that the capacitor starts with no initial charge (i.e., no voltage) so, $v_C(0^-) = 0$V. \\
+
+At steady state, the capacitor will have the same voltage as the voltage source because it will become completely charged, allowing no current to flow. Hence, $v_C(\infty) = 5$V. \\
+
+To find the time constant for this circuit, we suppress the voltage source by replacing it with a short:
+
+\[
+\tau = RC = (5)\frac{1}{2} = \frac{5}{2}s
+\]
+
+Now we can plug everything into the general solution to arrive at:
+
+\[
+\boxed{v_C(t) = 5 - 5e^{-2t/5}V}
+\]
+
+\paragraph{b)} Enough time passes such that the capacitor is entirely charged. The switch is then thrown at time $t = t_0$ from position A to position B, disconnecting the left half from the voltage source and connecting it instead to the right half of the circuit, with the voltage source left entirely disconnected. Find the new expression for $v_C(t)$, the voltage across the capacitor for $t>t_0$.
+
+\paragraph{Note:} Do not forget the time shift introduced by flipping the switch at time $t=t_0$.
+
+\subparagraph{Solution} We will use the same general solution from part a:
+
+\[
+v_C(t) = v_C(\infty) + (v_C(0^-)-v_C(\infty))e^{-t/\tau}
+\]
+
+This time, we know that the capacitor is charged to $5$V in the previous part, so $v_C(0^-) = 5$V. \\
+
+The circuit is now purely resistive, so the capacitor will completely discharge such that $v_C(\infty) = 0$V.
+
+To find the time constant, we first need to find the equivalent resistance $R_{eq}$ the capacitor sees (note that $||$ means 'in parallel').
+
+\[
+R_{eq} = 8||4 + 2 + 5
+\]
+\[
+8||4 = \frac{8*4}{8+4} = \frac{8}{3}\Omega
+\]
+\[
+R_{eq} = \frac{8}{3} + 2+ 5 = \frac{29}{3}\Omega
+\]
+
+Now that we have the equivalent resistance, $\tau$ can be found:
+
+\[
+\tau = R_{eq}C = \frac{29}{3}(\frac{1}{2}) = \frac{29}{6}s
+\]
+
+Plugging into the general solution (don't forget the time shift):
+
+\[
+\boxed{v_C(t) = 5e^{-\frac{6(t-t_0)}{29}}V}
+\]
+
+Notice that this is a zero-input solution, since there are no sources. You might have also noticed that part a was a zero-state solution, as there was no initial condition. This should help build intuition on what zero-state and zero-input solutions represent.
 
 \vfill
 \newpage
@@ -282,29 +479,81 @@ v_{out} = 10^6\times(v_+ - v_-)
 \end{circuitikz}
 \end{figure}
 
+\subparagraph{Solution} Notice that the output $v_{out}$ is connected directly to the inverting input $v_-$, so:
+
+\[
+v_{out} = v_-
+\]
+
+We can replace $v_{out}$ in the given equation with $v_-$ and solve for $v_-$ in terms of $v_+$:
+
+\[
+v_- = 10^6(v_+-v_-)
+\]
+
+\[
+v_-+10^6v_- = 10^6v_+
+\]
+
+\[
+v_- = \frac{10^6}{1+10^6}v_+
+\]
+
+However, $\frac{10^6}{1+10^6} = 0.9999 \approx 1$. Therefore:
+
+\[
+\boxed{v_- \approx v_+}
+\]
+
 \subparagraph{b)} What happens when the output of the chip is instead connected back to the non-inverting terminal ($v_+$)?
 
-\subparagraph{c)} Find $v_{out}(t)$ in terms of $v_{in}(t)$, assuming both voltages are in reference to a common ground, using:
+\subparagraph{Solution} In this case, $v_+ = v_{out}$. Notice that if $v_+$ increases a small amount above $v_-$, $v_{out}$ will increase by $10^6(v_+-v_-)$, a very large amount. However, $v_+$ and $v_{out}$ must be the same voltage because they are connected together, so $v_+$ will increase again. This creates a positive feedback loop that will quickly saturate the op-amp.
+
+\subparagraph{c)} Find $v_{out}(t)$ in terms of $v_{in}(t)$ for the figure below using the ideal op-amp approximation. $R_1 = 5\Omega$, $R_2 = 25\Omega$.
 \newline
-
-\quad$\textbf{i) }$ideal op-amp approximations.\newline
-
-\quad$\textbf{ii) }$ the given op-amp model. \newline
-
-Assume the capacitor has some non-zero initial charge $q_0$.
 
 \begin{figure}[ht!]
 \centering
 \begin{circuitikz}[american, voltage dir = old, transform shape]
 \node[op amp, anchor=+] (amp) {};
 \draw (amp.+) to[short] (0,-0.5) node[ground]{};
-\draw (amp.-) to[short] (0, 2) to[R,l=$R_1$] (2.2,2) -| (amp.out) to[short, -o] ++ (0.5,0) node [anchor=west] {$v_{out}$};
-\draw (amp.-) to[C,l_=$C_1$,-o] ++ (-2,0) node [anchor=east] {$v_{in}$};
+\draw (amp.-) to[short] (0, 2) to[R,l=$25\Omega$] (2.2,2) -| (amp.out) to[short, -o] ++ (0.5,0) node [anchor=west] {$v_{out}$};
+\draw (amp.-) to[R,l_=$5\Omega$,-o] ++ (-2,0) node [anchor=east] {$v_{in}$};
 \end{circuitikz}
 \end{figure}
 
-\quad$\textbf{iii) }$ Do your results from c.i) and c.ii) match?
+\subparagraph{Solution} Since the non-inverting terminal is grounded:
 
+\[
+v_+ = v_- = 0V
+\]
 
+From this, we can conclude that:
+
+\[
+v_{out} = -{v_R}_2
+\]
+
+No current enters either terminal, so all the current through the $5\Omega$ resistor must pass through the $25\Omega$ resistor. We will call this current $i_1$. Luckily, because $v_- = 0$V, we can find $i_1$ using only the $5\Omega$ resistor:
+
+\[
+i_1 = \frac{v_{in}}{5}
+\]
+
+The voltage ${v_R}_2$ across the $25\Omega$ resistor is simply:
+
+\[
+{v_R}_2 = i_1R_2 = \frac{v_{in}}{5}(25) = 5v_{in}
+\]
+
+We already know that $v_{out} = -{v_R}_2$, so:
+
+\[
+\boxed{v_{out} = -5v_{in}V}
+\]
+
+\quad$\textbf{i) }$ What is this op-amp circuit doing? What does it accomplish?
+
+\subparagraph{Solution} This is a fairly common op-amp circuit called an inverting amplifier. It takes a voltage input and produces an inverted voltage output according to its gain of $-\frac{R_f}{R_{in}}$. In this example, $R_2$ is $R_f$ and $R_1$ is $R_{in}$. Notice that depending on the choices of $R_{in}$ and $R_f$, an inverting amplifier can either attenuate (weaken) or amplify an input voltage. There are many more interesting uses of op-amps, some of which you will see later in this course.
 
 \end{document}
